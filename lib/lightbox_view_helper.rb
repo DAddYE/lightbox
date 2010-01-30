@@ -17,8 +17,9 @@ module ActionView
           link_to(image_tag(source, image_options), destination, html_options)
         end
         
-        def lightbox_link_to(name, options = {}, html_options = {}, *parameters_for_method_reference)
-          html_options.merge!(:rel => "lightbox") unless html_options[:rel]
+        def lightbox_link_to(name, options = {}, html_options = {}, *parameters_for_method_reference) 
+          group = html_options[:group]
+          html_options.merge!(:rel => (group)? "lightbox[#{group}]" : "lightbox") unless html_options[:rel]
           html_options.merge!(:title => "") unless html_options[:title]
           link_to(name, options, html_options, *parameters_for_method_reference)
         end
